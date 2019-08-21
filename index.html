@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Websocket Listener </title>
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+</head>
+<body>
+
+
+<div class="container">
+    <div class="columns">
+        <div class="column col-12">
+            <h2>Websocket Listener</h2>
+            <h3>Start listening to Webex Teams messages in the browser </h3>
+            <p>After a successful authentication further options will appear on the screen, such as:
+                <br><b>Start Listening to Messages -</b> activates the websocket listener and sends
+                a notification when a message is posted into one of your rooms.
+                <br>
+                <b>Create Test Room -</b> you can create your own test room,
+                where you can post random messages to speed things up.
+            </p>
+            <p>You can find the source code for this application <a href="app.js" target="_blank">here</a></p>
+            <hr>
+
+            <form class="form-group" id="authenticate">
+                <fieldset>
+                    <label class="form-label" for="access-token">Your Personal Access Token
+                        <br>
+                        <a href="https://developer.webex.com/docs/api/getting-started" target="_blank">Request one
+                            here</a>
+                        <br></label>
+                    <input
+                            class="column col-8"
+                            id="access-token"
+                            name="accessToken"
+                            placeholder="Personal Access Token"
+                            type="text"/>
+                    <button class="btn" id="authenticate-button" type="submit" title="submit">Authenticate</button>
+                </fieldset>
+                <div class="label: label label-rounded" id="authenticate-message">not authenticated</div>
+                <br/>
+                <div class="label: label label-rounded" id="listen-message">not listening to messages</div>
+            </form>
+
+            <br>
+            <div id="option-wrapper" style="display: none">
+
+                <button class="btn" id="listener-btn" title="Start Listening to Messages">
+                    Start Listening to Messages
+                </button>
+
+                <br>
+                <br>
+                <button class="btn" id="room-btn" title="Create Room">Create Test Room
+                </button>
+
+
+                <button class="btn" id="messages-btn" title="Send Random Message" style="display: none">
+                    Send a Message to Your Test Room
+                </button>
+
+            </div>
+            <div id="room-wrapper" style="display: none">
+                <br>
+
+                <div>
+                    <style>
+                        table, th, td {
+                            border: 1px solid black;
+                            border-collapse: collapse;
+                       }
+
+                        th, td {
+                            padding: 5px;
+                        }
+                    </style>
+
+                    <div style="text-align: center;">
+                        <br/>
+
+                        <table>
+                            <tr>
+                                <th colspan="4">Test room details</th>
+                            </tr>
+                            <tr style="font-weight:bold">
+                                <td>Room Title</td>
+                                <td>Created By</td>
+                                <td>Created At</td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div id='room-table-title'></div>
+                                </td>
+                                <td>
+                                    <div id='room-table-created-by'></div>
+                                </td>
+                                <td>
+                                    <div id="room-table-created-at"></div>
+                                </td>
+
+                            </tr>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <div id="message-wrapper" style="display: none">
+
+                <div>
+                    <style>
+                        table, th, td {
+                            border: 1px solid black;
+                            border-collapse: collapse;
+                        }
+
+                        th, td {
+                            padding: 5px;
+                        }
+                    </style>
+
+                    <div style="text-align: center;">
+                        <br/>
+
+                        <table style="width:100%">
+                            <tr>
+                                <th colspan="4">Last message</th>
+                            </tr>
+                            <tr style="font-weight:bold">
+                                <td>Room Title</td>
+                                <td>Message</td>
+                                <td>Sent by</td>
+                                <td>Sent at</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div id='message-room-title'></div>
+                                </td>
+                                <td>
+                                    <div id='message-posted'></div>
+                                </td>
+                                <td>
+                                    <div id='message-sent-by'></div>
+                                </td>
+                                <td>
+                                    <div id="message-sent-at"></div>
+                                </td>
+
+                            </tr>
+
+                        </table>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- /sdk_bundle.js is the bundled CiscoSpark JavaScript SDK -->
+<script src="bundle.js"></script>
+<!-- app.js is your application code -->
+<script src="app.js"></script>
+
+</body>
+</html>
